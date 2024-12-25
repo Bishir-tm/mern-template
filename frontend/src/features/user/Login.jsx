@@ -28,21 +28,13 @@ function Login() {
     }
 
     try {
-      const result = await dispatch(loginUser({ email, password }));
+      const result = dispatch(loginUser({ email, password }));
       if (loginUser.fulfilled.match(result)) {
         // If login is successful, navigate to the dashboard
         console.log(localStorage.getItem("token"));
         result.payload.user.role === "admin"
           ? navigate("/app/admin")
           : navigate("/app/dashboard");
-      } else if (loginUser.rejected.match(result)) {
-        // If login fails, show the error notification
-        dispatch(
-          showNotification({
-            message: result.payload || "Error Logging in!",
-            status: 0,
-          })
-        );
       }
     } catch (error) {
       showNotification({ message: "An unexpected error occurred!", status: 0 });

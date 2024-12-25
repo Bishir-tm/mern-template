@@ -16,11 +16,6 @@ connectToDB();
 // Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/users", require("./routes/userRoutes"));
-app.use("/api/wallet", require("./routes/walletRoutes"));
-app.use("/api/networks", require("./routes/networkRoutes"));
-app.use("/api/airtime", require("./routes/airtimeRoutes"));
-app.use("/api/data", require("./routes/dataRoutes"));
-app.use("/api/webhook", require("./routes/webhookRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
 
 const PORT = process.env.PORT || 5000;

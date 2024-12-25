@@ -47,24 +47,4 @@ export const adminRoutes = [
     icon: <UsersIcon className={iconClasses} />,
     name: "Users",
   },
-  {
-    path: "/app/admin/networks", // url
-    icon: <PhoneIcon className={iconClasses} />, // icon component
-    name: "Networks", // name that appear in Sidebar
-  },
-  {
-    path: "/app/admin/datatypes", // url
-    icon: <WifiIcon className={iconClasses} />, // icon component
-    name: "Data Types", // name that appear in Sidebar
-  },
-  {
-    path: "/app/admin/dataplans", // url
-    icon: <TableCellsIcon className={iconClasses} />, // icon component
-    name: "Data Plans", // name that appear in Sidebar
-  },
-  {
-    path: "/app/admin/airtimetypes", // url
-    icon: <TableCellsIcon className={iconClasses} />, // icon component
-    name: "Airtime Types", // name that appear in Sidebar
-  },
 ];

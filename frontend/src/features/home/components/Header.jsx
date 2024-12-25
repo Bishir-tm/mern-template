@@ -35,13 +35,13 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex space-x-6">
           <Link to="#products" className="text-base hover:text-primary">
-            Products
+            Link
           </Link>
           <Link to="#why-choose-us" className="text-base hover:text-primary">
-            Why Choose Us
+            Link
           </Link>
           <Link to="#pricing" className="text-base hover:text-primary">
-            Pricing
+            And Link
           </Link>
         </nav>
 
@@ -99,13 +99,13 @@ const Header = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link to="#products">Products</Link>
+              <Link to="#products"> Link</Link>
             </li>
             <li>
-              <Link to="#why-choose-us">Why Choose Us</Link>
+              <Link to="#why-choose-us"> Link</Link>
             </li>
             <li>
-              <Link to="#pricing">Pricing</Link>
+              <Link to="#pricing">And Link</Link>
             </li>
             <li>
               <Link to="/login">Login</Link>

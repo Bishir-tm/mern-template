@@ -6,13 +6,13 @@ const Footer = () => {
       <div>
         <span className="footer-title">Services</span>
         <a href="#" className="link link-hover">
-          Airtime
+          Link
         </a>
         <a href="#" className="link link-hover">
-          Data
+          Link
         </a>
         <a href="#" className="link link-hover">
-          Bill Payments
+          AGAIN Link
         </a>
       </div>
       <div>
