@@ -38,6 +38,7 @@ export const registerUser = createAsyncThunk(
       localStorage.setItem("token", token);
       return { token, user };
     } catch (error) {
+      console.log(error);
       return rejectWithValue(
         error.response?.data?.message || "Registration failed"
       );

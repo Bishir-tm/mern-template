@@ -1,9 +1,9 @@
-import ForgotPassword from "../features/user/ForgotPassword";
+import ResetPassword from "../features/user/ResetPassword";
 
 function ExternalPage() {
   return (
     <div className="">
-      <ForgotPassword />
+      <ResetPassword />
     </div>
   );
 }

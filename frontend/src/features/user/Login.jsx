@@ -6,6 +6,7 @@ import LoginHeroSection from "./LoginHeroSection";
 import ErrorText from "../../components/Typography/ErrorText";
 import InputText from "../../components/Input/InputText";
 import { showNotification } from "../common/headerSlice";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 function Login() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function Login() {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -28,7 +30,7 @@ function Login() {
     }
 
     try {
-      const result = dispatch(loginUser({ email, password }));
+      const result = await dispatch(loginUser({ email, password }));
       if (loginUser.fulfilled.match(result)) {
         // If login is successful, navigate to the dashboard
         console.log(localStorage.getItem("token"));
@@ -63,14 +65,39 @@ function Login() {
                   labelTitle="Email"
                   updateFormValue={updateFormValue}
                 />
-                <InputText
-                  defaultValue={loginObj.password}
-                  type="password"
-                  updateType="password"
-                  containerStyle="mt-4"
-                  labelTitle="Password"
-                  updateFormValue={updateFormValue}
-                />
+                <div className="relative mt-4">
+                  <InputText
+                    defaultValue={loginObj.password}
+                    type={showPassword ? "text" : "password"}
+                    updateType="password"
+                    labelTitle="Password"
+                    updateFormValue={updateFormValue}
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-10"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    {showPassword ? (
+                      <EyeSlashIcon className="h-5 w-5 text-gray-500" />
+                    ) : (
+                      <EyeIcon className="h-5 w-5 text-gray-500" />
+                    )}
+                  </button>
+                </div>
+                {error && (
+                  <div className=" mt-4">
+                    <span className="my-5 inline-block ">
+                      Forgot Password ?{" "}
+                      <Link
+                        to="/forgot-password "
+                        className="text-primary hover:underline "
+                      >
+                        Click here
+                      </Link>
+                    </span>
+                  </div>
+                )}
               </div>
 
               {error && <ErrorText>{error}</ErrorText>}
@@ -79,12 +106,15 @@ function Login() {
               </button>
 
               <div className="text-center mt-4">
-                Don't have an account?{" "}
-                <Link to="/register">
-                  <span className="inline-block hover:text-primary hover:underline">
+                Don't have an account ?{" "}
+                <span className="inline-block hover:text-primary hover:underline">
+                  <Link
+                    className="text-primary hover:underline "
+                    to="/register"
+                  >
                     Register
-                  </span>
-                </Link>
+                  </Link>
+                </span>
               </div>
             </form>
           </div>

@@ -48,7 +48,7 @@ const Header = () => {
         {/* Light and dark theme selection toogle **/}
         <label className="swap">
           <input type="checkbox" />
-          <SunIcon
+          <MoonIcon
             data-set-theme="light"
             data-act-class="ACTIVECLASS"
             className={
@@ -56,7 +56,7 @@ const Header = () => {
               (currentTheme === "dark" ? "swap-on" : "swap-off")
             }
           />
-          <MoonIcon
+          <SunIcon
             data-set-theme="dark"
             data-act-class="ACTIVECLASS"
             className={

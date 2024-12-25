@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LoginHeroSection from "./LoginHeroSection";
 import ErrorText from "../../components/Typography/ErrorText";
 import InputText from "../../components/Input/InputText";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 function Register() {
   const dispatch = useDispatch();
@@ -15,23 +16,40 @@ function Register() {
     fullname: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState(""); // For password match feedback
 
   const submitForm = async (e) => {
     e.preventDefault();
 
-    const { fullname, email, password } = registerObj;
-    if (!fullname || !email || !password) {
-      return; // You can add additional client-side validation here
+    const { fullname, email, password, confirmPassword } = registerObj;
+
+    if (!fullname || !email || !password || !confirmPassword) {
+      setPasswordError("All fields are required.");
+      return;
     }
 
-    // Dispatch the register action
-    await dispatch(
-      registerUser({ fullname: fullname, email: email, password })
-    );
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords do not match.");
+      return;
+    }
 
-    // If successful, redirect to the login page
-    navigate("/login");
+    setPasswordError(""); // Clear any previous errors
+
+    try {
+      // Dispatch the register action and wait for the response
+      await dispatch(registerUser({ fullname, email, password })).unwrap();
+
+      // If successful, redirect to the login page
+      navigate("/login");
+    } catch (err) {
+      // Handle errors gracefully (error is already managed by Redux state)
+      console.error("Registration failed: ", err);
+    }
   };
 
   const updateFormValue = ({ updateType, value }) => {
@@ -65,14 +83,49 @@ function Register() {
                   labelTitle="Email"
                   updateFormValue={updateFormValue}
                 />
-                <InputText
-                  defaultValue={registerObj.password}
-                  type="password"
-                  updateType="password"
-                  containerStyle="mt-4"
-                  labelTitle="Password"
-                  updateFormValue={updateFormValue}
-                />
+                <div className="relative mt-4">
+                  <InputText
+                    defaultValue={registerObj.password}
+                    type={showPassword ? "text" : "password"}
+                    updateType="password"
+                    labelTitle="Password"
+                    updateFormValue={updateFormValue}
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-10"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    {showPassword ? (
+                      <EyeSlashIcon className="h-5 w-5 text-gray-500" />
+                    ) : (
+                      <EyeIcon className="h-5 w-5 text-gray-500" />
+                    )}
+                  </button>
+                </div>
+                <div className="relative mt-4">
+                  <InputText
+                    defaultValue={registerObj.confirmPassword}
+                    type={showConfirmPassword ? "text" : "password"}
+                    updateType="confirmPassword"
+                    labelTitle="Confirm Password"
+                    updateFormValue={updateFormValue}
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-10"
+                    onClick={() => setShowConfirmPassword((prev) => !prev)}
+                  >
+                    {showConfirmPassword ? (
+                      <EyeSlashIcon className="h-5 w-5 text-gray-500" />
+                    ) : (
+                      <EyeIcon className="h-5 w-5 text-gray-500" />
+                    )}
+                  </button>
+                </div>
+                {passwordError && (
+                  <ErrorText styleClass="mt-2">{passwordError}</ErrorText>
+                )}
               </div>
 
               {error && <ErrorText>{error}</ErrorText>}
@@ -82,11 +135,11 @@ function Register() {
 
               <div className="text-center mt-4">
                 Already have an account?{" "}
-                <Link to="/login">
-                  <span className="inline-block hover:text-primary hover:underline">
+                <span className="inline-block">
+                  <Link to="/login" className="text-primary hover:underline">
                     Login
-                  </span>
-                </Link>
+                  </Link>
+                </span>
               </div>
             </form>
           </div>

@@ -14,6 +14,7 @@ import initializeApp from "./app/init"; // Custom app initialization function
 const Layout = lazy(() => import("./containers/Layout")); // Main app layout (protected)
 const Login = lazy(() => import("./pages/Login")); // Login page
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword")); // Password recovery page
+const ResetPassword = lazy(() => import("./pages/ResetPassword")); // Password recovery page
 const Register = lazy(() => import("./pages/Register")); // User registration page
 const Home = lazy(() => import("./pages/Home")); // Home page
 
@@ -37,6 +38,7 @@ function App() {
           {/* Public routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
 

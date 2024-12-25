@@ -17,6 +17,7 @@ const checkAuth = () => {
   const PUBLIC_ROUTES = [
     "login",
     "forgot-password",
+    "reset-password",
     "register",
     "documentation",
     "home",
